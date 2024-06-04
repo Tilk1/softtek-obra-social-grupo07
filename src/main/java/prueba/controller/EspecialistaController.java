@@ -1,28 +1,29 @@
 package prueba.controller;
 
+import java.util.List;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import prueba.repository.TurnoRepository;
+import prueba.model.Especialista;
+import prueba.repository.EspecialistaRepository;
 
-@Path("/turnos")
+@Path("/especialistas")
 @ApplicationScoped
-public class TurnoController {
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public class EspecialistaController {
 
     @Inject
-    TurnoRepository turnoRepository;
+    EspecialistaRepository especialistaRepository;
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response crearTurno(Turno turno) {
-        // Verificar y procesar los datos del turno
-        // Guardar el turno en la base de datos utilizando el repositorio
-        turnoRepository.guardarTurno(turno);
-        
-        return Response.ok("Turno creado exitosamente").build();
+    @GET
+    @Path("all")
+    public List<Especialista> getAllEspecialistas() {
+        return especialistaRepository.findAllOrderedById();
     }
 }
