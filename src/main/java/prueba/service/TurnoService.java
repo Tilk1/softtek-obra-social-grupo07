@@ -23,7 +23,7 @@ public class TurnoService {
     }
 
     public void guardarTurno(TurnoDTO turnoDTO) {
-        Turno turno = new Turno(turnoDTO.nombrePaciente, turnoDTO.DNIPaciente, turnoDTO.idMedicoEspecialista,
+        Turno turno = new Turno(turnoDTO.nombrePaciente, turnoDTO.dniPaciente, turnoDTO.idMedicoEspecialista,
                 turnoDTO.motivoConsulta,
                 turnoDTO.fechaHoraCita);
         this.turnoRepository.persist(turno);

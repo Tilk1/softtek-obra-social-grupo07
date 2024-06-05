@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Turno extends PanacheEntity {
     public String nombrePaciente;
-    public String DNIPaciente;
+    public String dniPaciente;
     public Long idMedicoEspecialista;
     public String motivoConsulta;
     public ZonedDateTime fechaHoraCita;

@@ -9,7 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class TurnoDTO {
     public String nombrePaciente;
-    public String DNIPaciente;
+    public String dniPaciente;
     public Long idMedicoEspecialista;
     public String motivoConsulta;
     public ZonedDateTime fechaHoraCita;
