@@ -15,12 +15,12 @@ public class RecetaService {
     @Inject
     RecetaRepository recetaRepository;
 
-    @Inject 
+    @Inject
     TurnoService turnoService;
 
     public List<Receta> obtenerRecetas() {
         return this.recetaRepository.findAll().list();
-    } 
+    }
 
     public Receta obtenerRecetaPorId(Long id) {
         return recetaRepository.findById(id);
@@ -31,13 +31,14 @@ public class RecetaService {
     }
 
     public void crearReceta(RecetaDTO receta) {
-        Turno turnoAsociado = turnoService.findById(receta.getIDTurno());
-        if(turnoAsociado != null){
-            Receta nuevaReceta = new Receta();
-            nuevaReceta.setDescripcion(receta.getDescripcion());
-            nuevaReceta.setTurno(turnoAsociado);
-            recetaRepository.persist(nuevaReceta);
+        Turno turnoAsociado = turnoService.findById(receta.getId_turno());
+        if (turnoAsociado == null) {
+            throw new IllegalArgumentException("No se encontro el turno asociado a la receta");
         }
+        Receta nuevaReceta = new Receta();
+        nuevaReceta.setDescripcion(receta.getDescripcion());
+        nuevaReceta.setTurno(turnoAsociado);
+        recetaRepository.persist(nuevaReceta);
     }
 
 }

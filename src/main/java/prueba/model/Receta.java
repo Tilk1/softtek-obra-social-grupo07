@@ -20,13 +20,11 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Receta extends PanacheEntity {
     private String descripcion;
-    
+
     @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
     private Turno turno;
 
     // Podria servir para la validez de la receta ?
-    @Column(name = "´fecha_creacion´")
     @CreationTimestamp
     private LocalDate fechaCreacion;
 }
