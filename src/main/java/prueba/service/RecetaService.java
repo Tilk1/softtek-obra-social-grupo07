@@ -3,7 +3,9 @@ package prueba.service;
 import java.util.List;
 
 import jakarta.inject.Inject;
+import prueba.DTO.RecetaDTO;
 import prueba.model.Receta;
+import prueba.model.Turno;
 import prueba.repository.RecetaRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -12,6 +14,9 @@ public class RecetaService {
 
     @Inject
     RecetaRepository recetaRepository;
+
+    @Inject 
+    TurnoService turnoService;
 
     public List<Receta> obtenerRecetas() {
         return this.recetaRepository.findAll().list();
@@ -25,8 +30,14 @@ public class RecetaService {
         return recetaRepository.obtenerPorIdTurno(id);
     }
 
-    public void crearReceta(Receta receta) {
-        recetaRepository.persist(receta);
+    public void crearReceta(RecetaDTO receta) {
+        Turno turnoAsociado = turnoService.findById(receta.getIDTurno());
+        if(turnoAsociado != null){
+            Receta nuevaReceta = new Receta();
+            nuevaReceta.setDescripcion(receta.getDescripcion());
+            nuevaReceta.setTurno(turnoAsociado);
+            recetaRepository.persist(nuevaReceta);
+        }
     }
 
 }

@@ -14,7 +14,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import prueba.service.RecetaService;
-
+import prueba.DTO.RecetaDTO;
 import prueba.model.Receta;
 
 @Path("/recetas")
@@ -61,7 +61,7 @@ public class RecetaController {
     @POST
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response crearReceta(Receta receta) {
+    public Response crearReceta(RecetaDTO receta) {
         try {
             recetaService.crearReceta(receta);
             return Response.ok("Se creo la receta exitosamente").build();
