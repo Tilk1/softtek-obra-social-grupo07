@@ -1,12 +1,11 @@
 package prueba.service;
 
 import java.util.List;
-
 import jakarta.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
 import prueba.DTO.TurnoDTO;
 import prueba.model.Turno;
 import prueba.repository.TurnoRepository;
-import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class TurnoService {
@@ -24,9 +23,11 @@ public class TurnoService {
 
     public void guardarTurno(TurnoDTO turnoDTO) {
         Turno turno = new Turno(turnoDTO.nombrePaciente, turnoDTO.dniPaciente, turnoDTO.idMedicoEspecialista,
-                turnoDTO.motivoConsulta,
-                turnoDTO.fechaHoraCita);
+                turnoDTO.motivoConsulta, turnoDTO.fechaHoraCita);
         this.turnoRepository.persist(turno);
     }
 
+    public boolean cancelarTurno(Long id) {
+        return this.turnoRepository.deleteById(id);
+    }
 }
