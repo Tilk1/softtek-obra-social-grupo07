@@ -10,7 +10,7 @@ mvn quarkus:dev
 ```
 Para ver la documentacion de las APIS navegar a la siguiente URL de swagger:
 
-##`http://localhost:8080/q/swagger-ui`
+`http://localhost:8080/q/swagger-ui`
 
 En caso de no tener una base de datos montada ejecutar con docker
 ```shell script
