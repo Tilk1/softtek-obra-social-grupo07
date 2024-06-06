@@ -22,4 +22,7 @@ David Cañete
 Dario Diaz
 Santiago Lizondo
 
+![image](https://github.com/Tilk1/softtek-obra-social-grupo07/assets/24284918/26334e36-de92-4373-9f9f-77858f964d43)
+
+
 
