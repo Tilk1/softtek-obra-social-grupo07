@@ -4,15 +4,16 @@
 
 ## BACKEND con Quarkus
 
-Puedes ejecutar la aplicacion desde el root:
+⛏ Puedes ejecutar la aplicacion desde el root:
+
 ```shell script
 mvn quarkus:dev
 ```
-Para ver la documentacion de las APIS navegar a la siguiente URL de swagger:
+📄 Para ver la documentacion de las APIS navegar a la siguiente URL de swagger:
 
 `http://localhost:8080/q/swagger-ui`
 
-En caso de no tener una base de datos montada ejecutar con docker
+📚 En caso de no tener una base de datos montada ejecutar con docker
 ```shell script
 docker-compose up
 ```
