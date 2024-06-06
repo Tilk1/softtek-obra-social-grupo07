@@ -19,10 +19,6 @@ public class TurnoRepository implements PanacheRepository<Turno> {
         return find("id", id).firstResult();
     }
 
-    public void guardarTurno(Turno turno) {
-        persist(turno);
-    }
-
     @Transactional
     public boolean deleteById(Long id) {
         Turno turno = findById(id);
