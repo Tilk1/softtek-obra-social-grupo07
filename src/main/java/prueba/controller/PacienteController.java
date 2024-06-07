@@ -32,7 +32,6 @@ public class PacienteController {
     @GET
     public Response obtenerpacientes() {
         try {
-            // Hay que ver si quieren el archivo o solo el objeto
             List<Paciente> respuesta = pacienteService.obtenerPacientes();
             if (respuesta == null) {
                 return Response.status(404, "No se encontraron pacientes").build();
@@ -61,7 +60,6 @@ public class PacienteController {
     @Path("/{id}")
     public Response obtenerPacientePorId(@PathParam("id") Long id) {
         try {
-            // Hay que ver si quieren el archivo o solo el objeto
             Paciente respuesta = pacienteService.obtenerPacientePorId(id);
             if (respuesta == null) {
                 return Response.status(404, "No se encontro el Paciente").build();
@@ -76,9 +74,6 @@ public class PacienteController {
     /**
      * Anda pero solo pasandole el objeto entero, estaba buscando la manera de solo pasarle una 
      * parte del objeto
-     * @param id
-     * @param paciente
-     * @return
      */
     @PUT
     @Path("/{id}")

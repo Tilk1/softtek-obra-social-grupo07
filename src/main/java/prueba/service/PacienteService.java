@@ -5,7 +5,6 @@ import java.util.List;
 import jakarta.inject.Inject;
 import prueba.DTO.PacienteDTO;
 import prueba.model.Paciente;
-import prueba.model.Turno;
 import prueba.repository.PacienteRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -15,8 +14,6 @@ public class PacienteService {
     @Inject
     PacienteRepository pacienteRepository;
 
-    @Inject
-    TurnoService turnoService;
 
     public List<Paciente> obtenerPacientes() {
         return pacienteRepository.findAll().list();
@@ -27,6 +24,9 @@ public class PacienteService {
     }
 
     public void crearPaciente(PacienteDTO paciente) {
+        if(paciente == null){
+            throw new IllegalArgumentException("Paciente no valido");
+        }
         Paciente nuevaPaciente = new Paciente();
         nuevaPaciente.setNombre(paciente.getNombre());
         nuevaPaciente.setDni(paciente.getDni());
