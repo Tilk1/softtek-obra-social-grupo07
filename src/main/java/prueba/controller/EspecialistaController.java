@@ -22,7 +22,6 @@ public class EspecialistaController {
     EspecialistaRepository especialistaRepository;
 
     @GET
-    @Path("all")
     public List<Especialista> getAllEspecialistas() {
         return especialistaRepository.findAllOrderedById();
     }
