@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -19,6 +20,7 @@ import prueba.service.EspecialistaService;
 
 @Path("/especialistas")
 @ApplicationScoped
+@Transactional
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class EspecialistaController {
@@ -28,12 +30,19 @@ public class EspecialistaController {
 
     @GET
     @Path("/{id}")
-    public Response obtenerEspecialistaPorId(@PathParam("id") Long id){
-        try{
+    public Response obtenerEspecialistaPorId(@PathParam("id") Long id) {
+        try {
             Especialista especialista = especialistaService.obtenerEspecialistaPorId(id);
+            if (especialista == null) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("{\"mesange\":\"Especialista no encontrado en la base de datos.\"}")
+                        .build();
+            }
             return Response.ok(especialista).build();
-        } catch(Exception e){
-            return Response.serverError().build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error interno del servidor. Por favor, inténtelo de nuevo más tarde.")
+                    .build();
         }
     }
 
@@ -42,24 +51,28 @@ public class EspecialistaController {
         return especialistaService.obtenerEspecialistas();
     }
 
-    @POST 
-    public Response crearEspecialista(EspecialistaDTO especialista){
-        try{
+    @POST
+    public Response crearEspecialista(EspecialistaDTO especialista) {
+        try {
             especialistaService.crearEspecialista(especialista);
-            return Response.ok("Se creo con exito!").build();
-        }catch(Exception e){
-            return Response.serverError().build();
+            return Response.status(Response.Status.CREATED)
+                    .entity("{¡El especialista se creó con éxito!}")
+                    .build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al crear el especialista: " + e.getMessage())
+                    .build();
         }
     }
 
     @PUT
     @Path("/{id}")
-    public Response actualizarEspecialista(@PathParam("id") Long id, EspecialistaDTO especialista){
-        try{
+    public Response actualizarEspecialista(@PathParam("id") Long id, EspecialistaDTO especialista) {
+        try {
             especialistaService.actualizarEspecialista(id, especialista);
             return Response.ok("Se actualizo exitosamente los datos").build();
-        }catch(Exception e){
-            return Response.serverError().build();
+        } catch (Exception e) {
+            return Response.status(400, "Error al actualizar el Especialista: " + e.getMessage()).build();
         }
     }
 
