@@ -2,12 +2,13 @@ package prueba.model;
 
 import jakarta.persistence.Entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import org.hibernate.annotations.CreationTimestamp;
-import java.time.LocalDate;
-
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDate;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
