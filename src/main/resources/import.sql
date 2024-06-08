@@ -14,14 +14,14 @@ VALUES (nextval('especialista_seq'), 'Dr. Carlos Sanchez', 'Oftalmologia', 'Lune
 
 -- TURNOS
 
-INSERT INTO turno (id, fechahoracita, idmedicoespecialista, dnipaciente, motivoconsulta, nombrepaciente)
-VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, null, 'Consulta por acne', null);
+-- INSERT INTO turno (id, fechahoracita, idmedicoespecialista, dnipaciente, motivoconsulta, nombrepaciente)
+-- VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, null, 'Consulta por acne', null);
 
-INSERT INTO turno (id, fechahoracita, idmedicoespecialista, dnipaciente, motivoconsulta, nombrepaciente)
-VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 2, null, 'Consulta por dolor en el pecho', null);
+-- INSERT INTO turno (id, fechahoracita, idmedicoespecialista, dnipaciente, motivoconsulta, nombrepaciente)
+-- VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, null, 'Consulta por dolor en el pecho', null);
 
 -- RECETAS
 
-INSERT INTO receta (id, fechaCreacion, turno_id, descripcion)
-VALUES (nextval('receta_seq'), '2021-10-01 10:00:00', 1, 'Aplicar crema en la zona afectada 2 veces al dia');
+-- INSERT INTO receta (id, fechaCreacion, turno_id, descripcion)
+-- VALUES (nextval('receta_seq'), '2021-10-01 10:00:00', 1, 'Aplicar crema en la zona afectada 2 veces al dia');
 
