@@ -1,6 +1,9 @@
 package prueba.controller;
 
 import java.util.logging.Logger;
+
+import org.eclipse.microprofile.openapi.annotations.Operation;
+
 import java.util.List;
 
 import jakarta.annotation.security.RolesAllowed;
@@ -43,6 +46,7 @@ public class RecetaController {
         }
     }
 
+    @Operation(summary = "Descargar receta médica", description = "Este endpoint permitirá a los pacientes autorizados descargar su receta médica proporcionando el ID del turno asociado a la receta. Se verificará la autenticación del usuario y la validez de la receta antes de permitir la descarga")
     @GET
     @Path("/{id}")
     @RolesAllowed({ Roles.USER })

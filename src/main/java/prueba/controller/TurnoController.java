@@ -3,6 +3,8 @@ package prueba.controller;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -32,6 +34,7 @@ public class TurnoController {
     TurnoService turnoService;
 
     @Transactional
+    @Operation(summary = "Crear turno medico", description = "Este endpoint permitirá a los usuarios crear un nuevo turno medico")
     @POST
     public Response crearTurno(TurnoDTO turnoDTO) {
         try {
@@ -45,6 +48,7 @@ public class TurnoController {
     }
 
     @Transactional
+    @Operation(summary = "Eliminar turno médico", description = "Este endpoint permitirá a los usuarios cancelar un turno médico existente identificado por su ID. No se requerirá enviar ningún dato en el cuerpo de la solicitud.")
     @DELETE
     @Path("/{id}")
     public Response cancelarTurno(@PathParam("id") Long id) {
@@ -86,6 +90,7 @@ public class TurnoController {
     }
 
     @Transactional
+    @Operation(summary = "Actualizar turno médico:", description = "Este endpoint permitirá a los usuarios actualizar la información de un turno médico existente identificado por su ID.")
     @PUT
     @Path("/{id}")
     public Response actualizarTurno(@PathParam("id") Long id, TurnoDTO turnoDTO) {

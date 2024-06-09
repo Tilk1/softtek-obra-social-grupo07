@@ -2,6 +2,8 @@ package prueba.controller;
 
 import java.util.List;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -51,6 +53,7 @@ public class EspecialistaController {
         }
     }
 
+    @Operation(summary = "Consultar cartilla de especialistas", description = "Este endpoint devolverá una lista de médicos especialistas disponibles.")
     @GET
     public List<Especialista> obtenerEspecialistas() {
         return especialistaService.obtenerEspecialistas();
