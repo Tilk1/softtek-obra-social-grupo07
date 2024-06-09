@@ -3,6 +3,7 @@ package prueba.controller;
 import java.util.logging.Logger;
 import java.util.List;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -16,6 +17,7 @@ import jakarta.ws.rs.core.Response;
 import prueba.service.RecetaService;
 import prueba.DTO.RecetaDTO;
 import prueba.model.Receta;
+import prueba.security.Roles;
 
 @Path("/recetas")
 @ApplicationScoped
@@ -25,7 +27,6 @@ public class RecetaController {
     private RecetaService recetaService;
 
     private static final Logger logger = Logger.getLogger(RecetaController.class.getName());
-
 
     @GET
     public Response obtenerRecetas() {
@@ -44,6 +45,7 @@ public class RecetaController {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({ Roles.USER })
     public Response obtenerRecetaPorIdTurno(@PathParam("id") Long id) {
         try {
             // Hay que ver si quieren el archivo o solo el objeto
@@ -54,7 +56,8 @@ public class RecetaController {
             return Response.ok(respuesta).build();
         } catch (Exception e) {
             logger.severe("Hubo un error al intentar obtener una receta: " + e.getMessage());
-            return Response.status(400).entity("Hubo un error al intentar obtener una receta: " + e.getMessage()).build();
+            return Response.status(400).entity("Hubo un error al intentar obtener una receta: " + e.getMessage())
+                    .build();
         }
     }
 
@@ -73,6 +76,7 @@ public class RecetaController {
 
     @GET
     @Path("/id={id}")
+    @RolesAllowed({ Roles.USER })
     public Response obtenerRecetaPorId(@PathParam("id") Long id) {
         try {
             // Hay que ver si quieren el archivo o solo el objeto
@@ -83,7 +87,8 @@ public class RecetaController {
             return Response.ok(respuesta).build();
         } catch (Exception e) {
             logger.severe("Hubo un error al intentar obtener una receta: " + e.getMessage());
-            return Response.status(400).entity("Hubo un error al intentar obtener una receta: " + e.getMessage()).build();
+            return Response.status(400).entity("Hubo un error al intentar obtener una receta: " + e.getMessage())
+                    .build();
         }
-    }    
+    }
 }
