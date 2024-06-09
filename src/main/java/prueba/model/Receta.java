@@ -1,15 +1,13 @@
 package prueba.model;
 
-import jakarta.persistence.Column;
+import java.time.ZonedDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
-
-import java.time.LocalDate;
-import org.hibernate.annotations.CreationTimestamp;
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -26,5 +24,5 @@ public class Receta extends PanacheEntity {
 
     // Podria servir para la validez de la receta ?
     @CreationTimestamp
-    private LocalDate fechaCreacion;
+    private ZonedDateTime fechaCreacion;
 }
