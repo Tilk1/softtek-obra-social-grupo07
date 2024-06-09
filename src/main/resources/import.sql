@@ -22,8 +22,8 @@ VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, null, 'Consulta por dolo
 
 -- RECETAS
 
--- INSERT INTO receta (id, fechaCreacion, turno_id, descripcion)
--- VALUES (nextval('receta_seq'), '2021-10-01 10:00:00', 1, 'Aplicar crema en la zona afectada 2 veces al dia');
+INSERT INTO receta (id, fechaCreacion, turno_id, descripcion)
+VALUES (nextval('receta_seq'), '2021-10-01 10:00:00', 1, 'Aplicar crema en la zona afectada 2 veces al dia');
 
 -- PACIENTES
 
