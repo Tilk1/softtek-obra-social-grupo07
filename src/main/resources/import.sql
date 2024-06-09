@@ -34,3 +34,8 @@ VALUES (nextval('receta_seq'), '2021-10-01 10:00:00', 1, 'Aplicar crema en la zo
 -- VALUES (nextval('paciente_seq'), '87654321', 'Luis', 'Lopez', '1991-01-15');
 
 
+-- USUARIOS
+
+INSERT INTO usuario (id, email, password, dni, nombre)
+VALUES (nextval('usuario_seq'), 'prueba@gmail.com', '123', '12345678', 'Paco');
+
