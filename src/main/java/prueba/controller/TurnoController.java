@@ -68,6 +68,23 @@ public class TurnoController {
         }
     }
 
+    @GET
+    @Path("/{id}")
+    public Response obtenerTurnoPorId(@PathParam("id") Long id) {
+        try {
+            Turno turno = turnoService.findById(id);
+            if (turno != null) {
+                return Response.ok(turno).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            logger.severe("Error al obtener el turno: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Hubo un error al intentar obtener el turno: " + e.getMessage()).build();
+        }
+    }
+
     @Transactional
     @PUT
     @Path("/{id}")

@@ -25,3 +25,12 @@ VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, null, 'Consulta por dolo
 -- INSERT INTO receta (id, fechaCreacion, turno_id, descripcion)
 -- VALUES (nextval('receta_seq'), '2021-10-01 10:00:00', 1, 'Aplicar crema en la zona afectada 2 veces al dia');
 
+-- PACIENTES
+
+-- INSERT INTO paciente (id, dni, nombre, apellidos, fechanacimiento)
+-- VALUES (nextval('paciente_seq'), '12345678', 'Paco', 'Perez', '1990-06-01');
+
+-- INSERT INTO paciente (id, dni, nombre, apellidos, fechanacimiento)
+-- VALUES (nextval('paciente_seq'), '87654321', 'Luis', 'Lopez', '1991-01-15');
+
+
