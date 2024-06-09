@@ -3,15 +3,20 @@ package prueba.repository;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import prueba.DTO.TurnoDTO;
 import prueba.model.Especialista;
 import prueba.model.Turno;
+import prueba.model.Receta;
 
 import java.util.List;
 
 @ApplicationScoped
 public class TurnoRepository implements PanacheRepository<Turno> {
+
+    @Inject
+    RecetaRepository recetaRepository;
 
     public List<Turno> findAllOrderedById() {
         return listAll(Sort.by("id"));
@@ -24,12 +29,14 @@ public class TurnoRepository implements PanacheRepository<Turno> {
     @Transactional
     public boolean deleteById(Long id) {
         Turno turno = findById(id);
-        if (turno != null) {
-            delete(turno);
-            return true;
-        } else {
+        if (turno == null)
             return false;
+        Receta receta = recetaRepository.findByTurno(turno);
+        if (receta != null) {
+            recetaRepository.delete(receta);
         }
+        delete(turno);
+        return true;
     }
 
     @Transactional
