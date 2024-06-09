@@ -14,7 +14,6 @@ public class PacienteService {
     @Inject
     PacienteRepository pacienteRepository;
 
-
     public List<Paciente> obtenerPacientes() {
         return pacienteRepository.findAll().list();
     }
@@ -24,7 +23,7 @@ public class PacienteService {
     }
 
     public void crearPaciente(PacienteDTO paciente) {
-        if(paciente == null){
+        if (paciente == null) {
             throw new IllegalArgumentException("Paciente no valido");
         }
         Paciente nuevaPaciente = new Paciente();
@@ -34,29 +33,19 @@ public class PacienteService {
         pacienteRepository.persist(nuevaPaciente);
     }
 
-    public void actualizarPaciente(Long id, PacienteDTO paciente){
+    public void actualizarPaciente(Long id, PacienteDTO paciente) {
         Paciente pacienteActual = pacienteRepository.findById(id);
-        
-        if(paciente.getNombre() != null || paciente.getNombre() != ""){
+
+        if (paciente.getNombre() != null || paciente.getNombre() != "") {
             pacienteActual.setNombre(paciente.getNombre());
         }
-        if(paciente.getDni() != null || paciente.getDni() != ""){
+        if (paciente.getDni() != null || paciente.getDni() != "") {
             pacienteActual.setDni(paciente.getDni());
         }
-        if(paciente.getNumeroCelular() != null || paciente.getNumeroCelular() != ""){
+        if (paciente.getNumeroCelular() != null || paciente.getNumeroCelular() != "") {
             pacienteActual.setNumeroCelular(paciente.getNumeroCelular());
         }
         pacienteRepository.persistAndFlush(pacienteActual);
-    }
-
-    public void desactivarPaciente(Long id){
-        Paciente pacienteActual = pacienteRepository.findById(id);
-        if(pacienteActual == null){
-            throw new IllegalArgumentException("El paciente no existe por Peruano: " +  id);
-        }
-        pacienteActual.setActivo(false);
-        pacienteRepository.persistAndFlush(pacienteActual);
-
     }
 
 }

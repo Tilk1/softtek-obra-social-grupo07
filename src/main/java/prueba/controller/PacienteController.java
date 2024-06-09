@@ -1,7 +1,7 @@
 package prueba.controller;
 
-import java.util.logging.Logger;
 import java.util.List;
+import java.util.logging.Logger;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -10,14 +10,13 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import prueba.service.PacienteService;
 import prueba.DTO.PacienteDTO;
 import prueba.model.Paciente;
+import prueba.service.PacienteService;
 
 @Path("/pacientes")
 @ApplicationScoped
@@ -27,7 +26,6 @@ public class PacienteController {
     private PacienteService pacienteService;
 
     private static final Logger logger = Logger.getLogger(PacienteController.class.getName());
-
 
     @GET
     public Response obtenerpacientes() {
@@ -67,14 +65,11 @@ public class PacienteController {
             return Response.ok(respuesta).build();
         } catch (Exception e) {
             logger.severe("Hubo un error al intentar obtener un Paciente: " + e.getMessage());
-            return Response.status(400).entity("Hubo un error al intentar obtener un Paciente: " + e.getMessage()).build();
+            return Response.status(400).entity("Hubo un error al intentar obtener un Paciente: " + e.getMessage())
+                    .build();
         }
-    }    
+    }
 
-    /**
-     * Anda pero solo pasandole el objeto entero, estaba buscando la manera de solo pasarle una 
-     * parte del objeto
-     */
     @PUT
     @Path("/{id}")
     @Transactional
@@ -86,21 +81,6 @@ public class PacienteController {
         } catch (Exception e) {
             logger.severe("Error al guardar la Paciente: " + e.getMessage());
             return Response.status(400).entity("Hubo un error al guardar el Paciente: " + e.getMessage()).build();
-        }
-    }
-
-
-    @DELETE
-    @Path("/{id}")
-    @Transactional
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response desactivarPaciente(@PathParam("id") Long id){
-        try{
-            pacienteService.desactivarPaciente(id);
-            return Response.ok("Se elimino correctamente el Paciente").build();
-        }catch (Exception e){
-            logger.severe("Error al eliminar un Pacinete: " + e.getMessage());
-            return Response.status(400).entity("Hubo un error al eliminar un Paciente: " + e.getMessage()).build();
         }
     }
 

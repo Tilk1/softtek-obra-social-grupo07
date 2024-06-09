@@ -12,10 +12,7 @@ public class Paciente extends PanacheEntity{
     private String nombre;
     private String dni;
     private String numeroCelular;
-    private Boolean activo;
 
-    public Paciente(){
-        this.activo = true;
+    public Paciente() {
     }
-
 }
