@@ -11,6 +11,7 @@ import prueba.model.Turno;
 import prueba.model.Receta;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @ApplicationScoped
 public class TurnoRepository implements PanacheRepository<Turno> {
@@ -27,31 +28,29 @@ public class TurnoRepository implements PanacheRepository<Turno> {
     }
 
     @Transactional
-    public boolean deleteById(Long id) {
+    public void borrarTurnoById(Long id) {
         Turno turno = findById(id);
-        if (turno == null)
-            return false;
+        if (turno == null) {
+            throw new NoSuchElementException();
+        }
         Receta receta = recetaRepository.findByTurno(turno);
         if (receta != null) {
             recetaRepository.delete(receta);
         }
         delete(turno);
-        return true;
     }
 
     @Transactional
-    public boolean actualizarTurno(Long id, TurnoDTO turnoDTO) {
+    public void actualizarTurno(Long id, TurnoDTO turnoDTO) {
         Turno turno = findById(id);
-        if (turno != null) {
-            turno.setFechaHoraCita(turnoDTO.getFechaHoraCita());
-            turno.setMotivoConsulta(turnoDTO.getMotivoConsulta());
-            if (turnoDTO.getIdMedicoEspecialista() != null) {
-                turno.especialista = Especialista.findById(turnoDTO.getIdMedicoEspecialista());
-            }
-            persist(turno);
-            return true;
-        } else {
-            return false;
+        if (turno == null) {
+            throw new NoSuchElementException();
         }
+        turno.setFechaHoraCita(turnoDTO.getFechaHoraCita());
+        turno.setMotivoConsulta(turnoDTO.getMotivoConsulta());
+        if (turnoDTO.getIdMedicoEspecialista() != null) {
+            turno.especialista = Especialista.findById(turnoDTO.getIdMedicoEspecialista());
+        }
+        persist(turno);
     }
 }

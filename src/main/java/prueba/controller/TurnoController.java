@@ -1,6 +1,7 @@
 package prueba.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -52,11 +53,15 @@ public class TurnoController {
     @DELETE
     @Path("/{id}")
     public Response cancelarTurno(@PathParam("id") Long id) {
-        boolean isDeleted = turnoService.cancelarTurno(id);
-        if (isDeleted) {
+        try {
+            turnoService.cancelarTurno(id);
             return Response.noContent().build();
-        } else {
+        } catch (NoSuchElementException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
+        } catch (Exception e) {
+            logger.severe("Error al cancelar el turno: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Hubo un error al intentar cancelar el turno: " + e.getMessage()).build();
         }
     }
 
@@ -89,21 +94,21 @@ public class TurnoController {
         }
     }
 
-    @Transactional
-    @Operation(summary = "Actualizar turno médico:", description = "Este endpoint permitirá a los usuarios actualizar la información de un turno médico existente identificado por su ID.")
+     @Transactional
+    @Operation(summary = "Actualizar turno médico", description = "Este endpoint permitirá a los usuarios actualizar la información de un turno médico existente identificado por su ID.")
     @PUT
     @Path("/{id}")
     public Response actualizarTurno(@PathParam("id") Long id, TurnoDTO turnoDTO) {
         try {
-            boolean isUpdated = turnoService.actualizarTurno(id, turnoDTO);
-            if (isUpdated) {
-                return Response.ok("Turno actualizado exitosamente").build();
-            } else {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
+            turnoService.actualizarTurno(id, turnoDTO);
+            return Response.ok("Turno actualizado exitosamente").build();
+        } catch (NoSuchElementException e) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         } catch (Exception e) {
             logger.severe("Error al actualizar el turno: " + e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Hubo un error al intentar actualizar el turno: " + e.getMessage()).build();
         }
     }

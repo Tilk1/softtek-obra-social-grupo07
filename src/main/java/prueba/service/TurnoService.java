@@ -38,23 +38,15 @@ public class TurnoService {
         turnoRepository.persist(turno);
     }
 
-    public boolean cancelarTurno(Long id) {
-        return turnoRepository.deleteById(id);
+    public void cancelarTurno(Long id) {
+        turnoRepository.borrarTurnoById(id);
     }
 
-    public boolean actualizarTurno(Long id, TurnoDTO turnoDTO) {
-        Turno turno = turnoRepository.findById(id);
-        if (turno != null) {
-            Especialista especialista = especialistaRepository.findById(turnoDTO.getIdMedicoEspecialista());
-            if (especialista == null) {
-                throw new IllegalArgumentException("No se encontró el especialista con el id proporcionado");
-            }
-            turno.setFechaHoraCita(turnoDTO.getFechaHoraCita());
-            turno.setMotivoConsulta(turnoDTO.getMotivoConsulta());
-            turno.setEspecialista(especialista);
-            turnoRepository.persist(turno);
-            return true;
+    public void actualizarTurno(Long id, TurnoDTO turnoDTO) {
+        Especialista especialista = especialistaRepository.findById(turnoDTO.getIdMedicoEspecialista());
+        if (especialista == null) {
+            throw new IllegalArgumentException("No se encontró el especialista con el id proporcionado");
         }
-        return false;
+        turnoRepository.actualizarTurno(id, turnoDTO);
     }
 }
