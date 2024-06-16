@@ -8,11 +8,19 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-public class Paciente extends PanacheEntity{
+public class Paciente extends PanacheEntity {
     private String nombre;
     private String dni;
     private String numeroCelular;
 
     public Paciente() {
     }
+
+    public Paciente(Long id, String nombre, String dni, String numeroCelular) {
+        this.id = id;
+        this.nombre = nombre;
+        this.dni = dni;
+        this.numeroCelular = numeroCelular;
+    }
+
 }
