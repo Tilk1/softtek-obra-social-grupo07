@@ -9,14 +9,9 @@
 ```shell script
 ./mvnw compile quarkus:dev
 ```
-🌎 Una vez compilada la aplicacion , puedes abrirla el navegador presionando la tecla:
-```shell script
-w
-```
-👾 Para correr los tests presiona la tecla:
-```shell script
-r
-```
+🌎 Una vez compilada la aplicacion , puedes abrirla el navegador presionando la tecla: W
+
+👾 Para correr los tests presiona la tecla: R
 
 📄 Para ver la documentacion de las APIS navegar a la siguiente URL de swagger:
 
