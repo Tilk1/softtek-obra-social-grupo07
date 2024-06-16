@@ -9,7 +9,6 @@
 ```shell script
 ./mvnw compile quarkus:dev
 ```
-🌎 Una vez compilada la aplicacion , puedes abrirla el navegador presionando la tecla: W
 
 👾 Para correr los tests presiona la tecla: R
 
