@@ -1,6 +1,9 @@
 package prueba.model;
 
 import java.time.ZonedDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,9 +20,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Turno extends PanacheEntity {
-    public String nombrePaciente;
-    public String dniPaciente;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Paciente paciente;
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     public Especialista especialista;
 

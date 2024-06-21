@@ -9,6 +9,8 @@ import prueba.repository.TurnoRepository;
 import lombok.Data;
 import prueba.model.Especialista;
 import prueba.repository.EspecialistaRepository;
+import prueba.model.Paciente;
+import prueba.repository.PacienteRepository;
 
 @ApplicationScoped
 @Data
@@ -16,6 +18,9 @@ public class TurnoService {
 
     @Inject
     TurnoRepository turnoRepository;
+
+    @Inject
+    PacienteRepository pacienteRepository;
 
     @Inject
     EspecialistaRepository especialistaRepository;
@@ -33,7 +38,9 @@ public class TurnoService {
         if (especialista == null) {
             throw new IllegalArgumentException("No se encontró el especialista con el id proporcionado");
         }
-        Turno turno = new Turno(turnoDTO.getNombrePaciente(), turnoDTO.getDniPaciente(), especialista,
+        Paciente paciente = pacienteRepository.findByDni(turnoDTO.getDniPaciente());
+
+        Turno turno = new Turno(paciente, especialista,
                 turnoDTO.getMotivoConsulta(), turnoDTO.getFechaHoraCita());
         turnoRepository.persist(turno);
     }

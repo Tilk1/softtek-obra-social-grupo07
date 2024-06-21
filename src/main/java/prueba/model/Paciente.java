@@ -1,7 +1,11 @@
 package prueba.model;
 
+import java.util.List;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +18,9 @@ public class Paciente extends PanacheEntity {
     private String numeroCelular;
     public String email;
     public String password;
+
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Turno> turnos;
 
     public Paciente() {
     }

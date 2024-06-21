@@ -19,11 +19,11 @@ VALUES (nextval('paciente_seq'), '12345678', 'Paco', '099123456', 'prueba@gmail.
 
 -- TURNOS
 
-INSERT INTO turno (id, fechahoracita, especialista_id, dnipaciente, motivoconsulta, nombrepaciente)
-VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, '12345678', 'Consulta por acne', 'Paco');
+INSERT INTO turno (id, fechahoracita, especialista_id, paciente_id, motivoconsulta)
+VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, 1, 'Consulta por acne');
 
-INSERT INTO turno (id, fechahoracita, especialista_id, dnipaciente, motivoconsulta, nombrepaciente)
-VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, '12345678', 'Consulta por dolor en el pecho', 'Paco');
+INSERT INTO turno (id, fechahoracita, especialista_id, paciente_id, motivoconsulta)
+VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, 1, 'Consulta por dolor en el pecho');
 
 -- RECETAS
 
