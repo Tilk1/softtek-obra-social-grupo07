@@ -12,6 +12,8 @@ public class Paciente extends PanacheEntity {
     private String nombre;
     private String dni;
     private String numeroCelular;
+    public String email;
+    public String password;
 
     public Paciente() {
     }

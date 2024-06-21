@@ -1,24 +1,26 @@
 package prueba.service;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
 
-import prueba.repository.UsuarioRepository;
-import prueba.model.Usuario;
+import prueba.repository.PacienteRepository;
+import prueba.DTO.UserLoginDTO;
+import prueba.model.Paciente;
 import prueba.security.TokenService;
 
 @ApplicationScoped
 public class AuthService {
 
     @Inject
-    UsuarioRepository usuarioRepository;
+    PacienteRepository pacienteRepository;
 
     @Inject
     TokenService service;
 
-    public String login(String mailString, String password) {
+    public UserLoginDTO login(String mailString, String password) {
         if (mailString == null || password == null) {
             throw new IllegalArgumentException("Mail and password are required");
         }
@@ -26,17 +28,26 @@ public class AuthService {
             throw new IllegalArgumentException("Mail and password are required");
         }
 
-        Usuario usuario = usuarioRepository.buscarUsuarioPorEmail(mailString);
+        Paciente paciente = pacienteRepository.buscarPacientePorEmail(mailString);
 
-        if (usuario == null) {
+        if (paciente == null) {
             throw new IllegalArgumentException("User not found");
         }
 
-        if (!usuario.getPassword().equals(password)) {
+        if (!paciente.getPassword().equals(password)) {
             throw new IllegalArgumentException("Invalid password");
         }
 
-        return service.generateUserToken(mailString, password);
+        String token = service.generateUserToken(mailString, password);
+
+        UserLoginDTO userData = new UserLoginDTO();
+        userData.setToken(token);
+        userData.setNombre(paciente.getNombre());
+        userData.setEmail(paciente.getEmail());
+        userData.setDni(paciente.getDni());
+        userData.setNumeroCelular(paciente.getNumeroCelular());
+    
+        return userData;
 
     }
 

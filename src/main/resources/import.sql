@@ -14,8 +14,8 @@ VALUES (nextval('especialista_seq'), 'Dr. Carlos Sanchez', 'Oftalmologia', 'Lune
 
 -- PACIENTE
 
-INSERT INTO paciente (id, dni, nombre, numerocelular)
-VALUES (nextval('paciente_seq'), '12345678', 'Paco', '099123456');
+INSERT INTO paciente (id, dni, nombre, numerocelular, email, password)
+VALUES (nextval('paciente_seq'), '12345678', 'Paco', '099123456', 'prueba@gmail.com', '123');
 
 -- TURNOS
 
@@ -30,9 +30,4 @@ VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, '12345678', 'Consulta po
 INSERT INTO receta (id, fechaCreacion, turno_id, descripcion)
 VALUES (nextval('receta_seq'), '2021-10-01 10:00:00', 1, 'Aplicar crema en la zona afectada 2 veces al dia');
 
-
--- USUARIOS
-
-INSERT INTO usuario (id, email, password, dni, nombre)
-VALUES (nextval('usuario_seq'), 'prueba@gmail.com', '123', '12345678', 'Paco');
 
