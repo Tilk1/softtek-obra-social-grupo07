@@ -25,7 +25,6 @@ public class Turno extends PanacheEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Paciente paciente;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     public Especialista especialista;
 
