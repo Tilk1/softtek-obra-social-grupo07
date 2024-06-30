@@ -8,6 +8,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,4 +31,7 @@ public class Turno extends PanacheEntity {
 
     public String motivoConsulta;
     public ZonedDateTime fechaHoraCita;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Receta receta;
 }

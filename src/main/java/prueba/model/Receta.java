@@ -4,6 +4,8 @@ import java.time.ZonedDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 public class Receta extends PanacheEntity {
     private String descripcion;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private Turno turno;
 

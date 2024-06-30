@@ -30,4 +30,8 @@ VALUES (nextval('turno_seq'), '2021-10-01 10:00:00', 1, 1, 'Consulta por dolor e
 INSERT INTO receta (id, fechaCreacion, turno_id, descripcion)
 VALUES (nextval('receta_seq'), '2021-10-01 10:00:00', 1, 'Aplicar crema en la zona afectada 2 veces al dia');
 
+-- Agrega la receta al turno 1
+
+UPDATE turno SET receta_id = 1 WHERE id = 1;
+
 
