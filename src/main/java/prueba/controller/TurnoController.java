@@ -94,7 +94,7 @@ public class TurnoController {
         }
     }
 
-     @Transactional
+    @Transactional
     @Operation(summary = "Actualizar turno médico", description = "Este endpoint permitirá a los usuarios actualizar la información de un turno médico existente identificado por su ID.")
     @PUT
     @Path("/{id}")
@@ -110,6 +110,20 @@ public class TurnoController {
             logger.severe("Error al actualizar el turno: " + e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Hubo un error al intentar actualizar el turno: " + e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/especialidad/{especialidad}")
+    public Response obtenerTurnosPorEspecialidad(@PathParam("especialidad") String especialidad) {
+        try {
+            List<Turno> turnos = turnoService.obtenerTurnosPorEspecialidad(especialidad);
+            return Response.ok(turnos).build();
+        } catch (Exception e) {
+            logger.severe("Error al obtener los turnos por especialidad: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Hubo un error al intentar obtener los turnos por especialidad: " + e.getMessage()).build();
+
         }
     }
 }

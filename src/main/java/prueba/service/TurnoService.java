@@ -41,7 +41,7 @@ public class TurnoService {
         Paciente paciente = pacienteRepository.findByDni(turnoDTO.getDniPaciente());
 
         Turno turno = new Turno(paciente, especialista,
-                turnoDTO.getMotivoConsulta(), turnoDTO.getFechaHoraCita());
+                turnoDTO.getMotivoConsulta(), turnoDTO.getFechaHoraCita(), true, null);
         turnoRepository.persist(turno);
     }
 
@@ -55,5 +55,9 @@ public class TurnoService {
             throw new IllegalArgumentException("No se encontró el especialista con el id proporcionado");
         }
         turnoRepository.actualizarTurno(id, turnoDTO);
+    }
+
+    public List<Turno> obtenerTurnosPorEspecialidad(String especialidad) {
+        return turnoRepository.findTurnosByEspecialidad(especialidad);
     }
 }

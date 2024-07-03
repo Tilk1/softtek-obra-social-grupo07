@@ -84,4 +84,17 @@ public class EspecialistaController {
         }
     }
 
+    @GET
+    @Path("/especialidades")
+    public Response obtenerEspecialidades() {
+        try {
+            List<String> especialidades = especialistaService.obtenerEspecialidades();
+            return Response.ok(especialidades).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error al obtener las especialidades: " + e.getMessage())
+                    .build();
+        }
+    }
+
 }

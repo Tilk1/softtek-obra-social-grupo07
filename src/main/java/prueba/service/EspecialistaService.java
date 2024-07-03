@@ -5,7 +5,11 @@ import jakarta.inject.Inject;
 import prueba.repository.EspecialistaRepository;
 import prueba.DTO.EspecialistaDTO;
 import prueba.model.Especialista;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Set;
 
 @ApplicationScoped
 public class EspecialistaService {
@@ -43,4 +47,10 @@ public class EspecialistaService {
         especialistaActual.setUbicacion(especialista.getUbicacion());
         especialistaActual.setHorariosConsulta(especialista.getHorariosConsulta());
     }
+
+public List<String> obtenerEspecialidades() {
+    List<String> especialidades = especialistaRepository.findEspecialidades();
+    Set<String> especialidadesUnicas = new HashSet<>(especialidades);
+    return especialidadesUnicas.stream().collect(Collectors.toList());
+}
 }

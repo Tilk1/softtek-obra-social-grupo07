@@ -31,6 +31,7 @@ public class Turno extends PanacheEntity {
 
     public String motivoConsulta;
     public ZonedDateTime fechaHoraCita;
+    public boolean solicitado;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Receta receta;

@@ -53,4 +53,8 @@ public class TurnoRepository implements PanacheRepository<Turno> {
         }
         persist(turno);
     }
+
+    public List<Turno> findTurnosByEspecialidad(String especialidad) {
+        return list("especialista.especialidad", especialidad);
+    }
 }
